@@ -121,7 +121,6 @@ public class FilesHandling {
 					Lessons.lessons.add(l1);
 					Lessons.lessons.add(l2);
 					Lessons.lessons.add(l3);
-					Lessons.getHoursForAllClasses()[code-100] += l1.getHoursA()[0]*3 + l1.getHoursB()[0]*3 + l1.getHoursC()[0]*3;
 					//System.out.println(l1.toString());
 
 	                line = reader.readLine();
