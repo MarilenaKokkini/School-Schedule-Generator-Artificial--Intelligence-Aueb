@@ -34,10 +34,6 @@ public class Lessons
     public int getRemaining_hours() {
 		return remaining_hours;
 	}
-
-	public static int[] getHoursForAllClasses() {
-		return hoursForAllClasses;
-	}
 	public void setHoursA(int hours, int index){
 		this.hoursA[index] = hours;
 	}
