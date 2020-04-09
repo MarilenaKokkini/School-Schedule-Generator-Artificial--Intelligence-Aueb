@@ -15,7 +15,6 @@ public class Teachers {
 	private final int limit_weekly_working_hours;
 	public static ArrayList<Teachers> teachers = new ArrayList<Teachers>();
 	private static Queue<Teachers> teachers_queue = new LinkedList<Teachers>();
-	int [] dHours = new int[5];
 
 
 	public Teachers(){
@@ -29,9 +28,6 @@ public class Teachers {
 		this.max_hours_per_day = max_hours_per_day;
 		this.max_hours_per_week = max_hours_per_week;
 		this.limit_weekly_working_hours = max_hours_per_week;
-		for(int i=0; i<5; i++){
-           this.dHours[i]= max_hours_per_day;
-        }
 	}
 	
 	public int get_limit_weekly_hours() {
@@ -73,9 +69,6 @@ public class Teachers {
 		this.name = name;
 	}
 
-    public int[] getdHours() {
-        return this.dHours;
-    }
 
     public int getCode() {
 		return this.code;
