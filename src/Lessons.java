@@ -11,10 +11,7 @@ public class Lessons
     private int[] hoursC;
     public static ArrayList<Lessons> lessons = new ArrayList<Lessons>();
     private int section;
-   // private int quantum_per_day;
-   private int remaining_hours;
-   private static int[] hoursForAllClasses = new int[20];
-
+    private int remaining_hours;
 
 
 	public Lessons() {}
@@ -33,21 +30,6 @@ public class Lessons
         else this.remaining_hours = hoursC[0];
     }
 
-    /*public static void initialize_hoursForAllClasses(){
-		hoursForAllClasses = new int[20]; //the lessons are 20 in total
-		for (Lessons l: lessons){
-			for (int i=0; i<lessons.size(); i++){
-				if (l.getCode()==lessons.get(i).getCode()){
-					if (l.Class.equalsIgnoreCase("A"))
-						hoursForAllClasses[l.getCode()-100] += l.getHoursA()[0];
-					else if (l.Class.equalsIgnoreCase("B"))
-						hoursForAllClasses[l.getCode()-100] += l.getHoursB()[0];
-					else if (l.Class.equalsIgnoreCase("C"))
-						hoursForAllClasses[l.getCode()-100] += l.getHoursC()[0];
-				}
-			}
-		}
-	} */
     
     public int getRemaining_hours() {
 		return remaining_hours;
@@ -56,28 +38,6 @@ public class Lessons
 	public static int[] getHoursForAllClasses() {
 		return hoursForAllClasses;
 	}
-   /* public int getQuantum_per_day() {
-		return quantum_per_day;
-	}
-
-	public void setQuantum_per_day(int quantum_per_day) {
-		this.quantum_per_day = quantum_per_day;
-	}
-
-	
-
-	public void setRemaining_hours(int remaining_hours) {
-		this.remaining_hours = remaining_hours;
-	}
-
-	public void initialize_quantums() {
-    	for(Lessons l:lessons) {
-    		if(l.remaining_hours==0) quantum_per_day =0;
-    		if(l.remaining_hours<=2) quantum_per_day=1; //1 wra, 2 wres, 4 wres, 3wres
-    		else if(l.remaining_hours>2) quantum_per_day=2;	
-    		
-    	}
-    }*/
 	public void setHoursA(int hours, int index){
 		this.hoursA[index] = hours;
 	}
@@ -92,8 +52,6 @@ public class Lessons
 		return section;
 	}
     
-    
-    //maybe boolean?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	public ArrayList<String> find_Aclass_lessons() { // find the lessons of the 1st class
     	ArrayList<String> a = new ArrayList<String>();
