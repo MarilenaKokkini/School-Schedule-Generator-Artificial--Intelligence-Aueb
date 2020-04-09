@@ -6,8 +6,6 @@ public class State implements Comparable<State> {
 	private Combination[][][] schedule; //weekly schedule that we have all the classes.
 	private double score;
 	private State father;
-	private int[] emptyTileRow;
-	private int[] emptyTileColumn;
 	private int[][] hours_per_section; //last column for boolean(0/1)
 	private int[] teachers_week_hours; // probably arraylist
 	private int strictConstraints;
@@ -22,9 +20,6 @@ public class State implements Comparable<State> {
 		this.schedule = new Combination[7][5][9]; // hour, day, section
 		this.hours_per_section = new int[9][6]; //last column for boolean(0/1)
 		this.teachers_week_hours = new int[Teachers.teachers_real_size()];
-		this.emptyTileRow = new int[9];
-		this.emptyTileColumn = new int[9];
-		//check the hours of lessons!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Collections.shuffle(Teachers.getTeachers());
 		Random r = new Random();
 		Queue<Teachers> queue = new LinkedList<Teachers>(Teachers.getTeachers());
@@ -175,18 +170,6 @@ public class State implements Comparable<State> {
 				}
 			}
 		}
-		for(int k=0; k<9; k++){ //section
-			loop1:
-			for(int j=0; j<5; j++){ //day
-				for(int i=0; i<7; i++){ //hourS
-					if(schedule[i][j][k]==null) {
-						emptyTileRow[k]=i;
-						emptyTileColumn[k]=j;
-						break loop1;
-					}
-				}
-			}
-		}
 
 
 	}
@@ -200,10 +183,8 @@ public class State implements Comparable<State> {
 			{
 				for(int i=0; i<7; i++)
 				{
-					//if(this.schedule[i][j][k]==null) continue;
 					if(this.schedule[i][j][k]!=null) hours++;
-					//if(!this.schedule[i][j][k].getLesson().getName().equalsIgnoreCase("me")) hours++;
-					//if(i==this.emptyTileRow[k] && j==this.emptyTileColumn[k]) hours++;
+					
 
 				}
 
@@ -247,8 +228,6 @@ public class State implements Comparable<State> {
 		this.strictConstraints=0;
 		this.hours_per_section = new int[9][6]; //last column for boolean(0/1)
 		this.teachers_week_hours = new int[Teachers.teachers_real_size()];
-		this.emptyTileColumn = new int[9];
-		this.emptyTileRow = new int[9];
 		this.score = 0;
 		//this.father=s.getFather();
 
@@ -264,41 +243,7 @@ public class State implements Comparable<State> {
 			}
 		}
 
-		for(int k=0; k<9; k++){
-			this.emptyTileRow[k] =s.getEmptyTileRow()[k];
-			this.emptyTileColumn[k]=s.getEmptyTileColumn()[k];
-		}
 	}
-
-	/*public State(Combination[][][] com) {
-		this.schedule = new Combination[7][5][9];
-		this.hours_per_section = new int[9][6]; //last column for boolean(0/1)
-		this.teachers_week_hours = new int[Teachers.teachers_real_size()];
-		this.emptyTileColumn = new int[9];
-		this.emptyTileRow = new int[9];
-		this.score = 0;
-
-		if(com==null) return;
-		for(int i=0; i<7; i++){
-			for(int j=0; j<5; j++){
-				for(int k=0; k<9; k++) {
-					this.schedule[i][j][k] = com[i][j][k];
-				}
-			}
-		}
-		for(int k=0; k<9; k++){ //section
-			loop1:
-			for(int j=0; j<5; j++){ //day
-				for(int i=0; i<7; i++){ //hourS
-					if(schedule[i][j][k]==null) {
-						emptyTileRow[k]=i;
-						emptyTileColumn[k]=j;
-						break loop1;
-					}
-				}
-			}
-		}
-	} */
 
 
 
@@ -648,26 +593,7 @@ public class State implements Comparable<State> {
 	}
 
 
-	public boolean isTerminal()
-	{
-		System.out.println("Strict: "+this.strictConstraints);
-		System.out.println("Resilient: " + this.resilientConstraints);
-		if(this.checkHours()==false) return false;
-
-		if(this.strictConstraints==4){
-			if(this.strictConstraints==this.resilientConstraints){
-				return true;
-			}
-			else{
-				if(this.resilientConstraints==3){
-					return true;
-				}
-			}
-		}
-
-		return false;
-
-	}
+	
 
 
 
@@ -709,51 +635,9 @@ public class State implements Comparable<State> {
         return result;
     }
 
-	/*public ArrayList<Teachers> change_teacher(Combination com) { // check if arraylist is empty
-		if(com==null) return null;
-		int l_code = com.getLesson().getCode();
-		ArrayList<Teachers> te = new ArrayList<Teachers>();
-		for(Teachers t: Teachers.getTeachers()) {
-			if(t.getCode()==l_code && com.getTeacher().getId()!=t.getId()) {
-				te.add(t);
-			}
+	
 
-		}
-		return te;
-	} */
-
-	/*public boolean move_left(int k) {
-		// if it's Monday
-		if(emptyTileColumn[k]==0) return false;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = this.schedule[emptyTileRow[k]][emptyTileColumn[k]-1][k];
-		emptyTileColumn[k]--;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = null;
-		return true;
-	}
-	public boolean move_right(int k) {
-		//if it's Friday
-		if(emptyTileColumn[k]==4) return false;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = this.schedule[emptyTileRow[k]][emptyTileColumn[k]+1][k];
-		emptyTileColumn[k]++;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = null;
-		return true;
-	}
-
-	public boolean move_up(int k) {
-		if(emptyTileRow[k]==0) return false;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = this.schedule[emptyTileRow[k]-1][emptyTileColumn[k]][k];
-		emptyTileRow[k]--;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = null;
-		return true;
-	}
-
-	public boolean move_down(int k) {
-		if(emptyTileRow[k]==6) return false;  || this.schedule[emptyTileRow[k]+1][emptyTileColumn[k]][k]==null
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = this.schedule[emptyTileRow[k]+1][emptyTileColumn[k]][k];
-		emptyTileRow[k]++;
-		this.schedule[emptyTileRow[k]][emptyTileColumn[k]][k] = null;
-		return true;
-	} */
+	
 
 	public void swapTile(){
 		Random r = new Random();
@@ -796,19 +680,7 @@ public class State implements Comparable<State> {
 		return children;
 	}
 
-  // for A* implementation!
-	public double getScoreUntilRoot()
-	{
-		double g=0;
-		State tmp = this;
-		while (tmp.getFather()!=null){
-			g+= tmp.getFather().getScore();
-			tmp = tmp.getFather();
-		}
-
-		return g;
-
-	}
+  
 
 	public double getScore()
 	{
@@ -828,44 +700,14 @@ public class State implements Comparable<State> {
 	}
 
 
-	@Override
-	public int hashCode()
-	{
-		int hash = 17;
-		for(int k=0; k<9; k++){
-			hash = hash + this.emptyTileRow[k] + this.emptyTileColumn[k];
-		}
-		hash = hash + getSums();
-		return hash;
-	}
-
-	public int getSums()
-	{
-		int sum=0;
-		for(int i=0; i<7; i++){
-			for(int j=0; j<5; j++){
-				for(int k=0; k<9; k++){
-					if (schedule[i][j][k]==null) continue;
-					sum += Math.pow(i,k+j) + (this.schedule[i][j][k].getTeacher().getId()+ this.schedule[i][j][k].getLesson().getCode() );
-				}
-			}
-		}
-		return sum;
-	}
+	
 
 	@Override
 	public int compareTo(State s) {
 		return Double.compare(this.score,s.score);
 	}
 
-	/*@Override
-	public int compareTo(State s) {
-		double f,s_f;
-		f=s_f=0;
-		f= this.score+this.getScoreUntilRoot();
-		s_f=s.score+ s.getScoreUntilRoot();
-		return Double.compare(f,s_f);
-	} */
+	
 
 
 
