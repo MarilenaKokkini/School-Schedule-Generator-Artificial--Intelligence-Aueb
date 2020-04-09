@@ -247,14 +247,6 @@ public class State implements Comparable<State> {
 
 
 
-	public int[] getEmptyTileRow() {
-		return emptyTileRow;
-	}
-
-	public int[] getEmptyTileColumn() {
-		return emptyTileColumn;
-	}
-
 	private int count_lesson_per_day(Combination com , int day, int section) {
 		//int 0=Monday....
 		int counter = 0;
@@ -287,8 +279,6 @@ public class State implements Comparable<State> {
 		Combination c1;
 		Combination c2;
 		for(int k=0; k<9; k++) {
-			if(this.emptyTileRow[k]!= ((State)(obj)).getEmptyTileRow()[k]) return false;
-			if(this.emptyTileColumn[k] != ((State)(obj)).getEmptyTileColumn()[k]) return false;
 			for(int i=0; i<7; i++) {
 				for(int j=0; j<5; j++) {
 					c1 = this.schedule[i][j][k];
