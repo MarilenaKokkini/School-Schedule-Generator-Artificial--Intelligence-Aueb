@@ -1,5 +1,9 @@
 # school-schedule-generator
-Implemented simulated annealing algorithm that creates a high-shool schedule. The schedule satisfies certain constraints.
-A heuristic function was used for evaluation of every schedule that was generated during the process. The algorithm searches the state space that was created and chooses the best possible schedule according to the score that was given by the heuristic function.
+
+***Project for AI course.***
+
+Implemented a program that creates an initial random high-school schedule based on some courses and teachers given from text files. The initial schedule defies some(or all) the constraints that were given. The program creates a state space in the form of a tree (with children etc.) by changing the position of some courses or teachers randomly.
+A heuristic function was used for evaluation of every schedule (here modelled as a state) that was generated during the process. 
+The [simulated annealing algorithm](https://en.wikipedia.org/wiki/Simulated_annealing) was implemented in order to searche the state space that was created. The algorithm chooses the best possible schedule by selecting neighbors of each node according to the score that was given to them by the heuristic function.
 
 Files lessons.txt and teachers.txt consist the program's inputs.
