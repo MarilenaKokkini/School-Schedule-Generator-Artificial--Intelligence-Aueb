@@ -6,6 +6,6 @@ Implemented a program that creates an initial random high-school schedule based 
 
 A heuristic function was used for evaluation of every schedule (here modelled as a state) that was generated during the process. 
 
-The [simulated annealing algorithm](https://en.wikipedia.org/wiki/Simulated_annealing) was implemented in order to searche the state space that was created. The algorithm chooses the best possible schedule by selecting neighbors of each node according to the score that was given to them by the heuristic function.
+The [simulated annealing algorithm](https://en.wikipedia.org/wiki/Simulated_annealing) was implemented in order to search the state space that was created. The algorithm chooses the best possible schedule by selecting neighbors of each node according to the score that was given to them by the heuristic function.
 
 Files lessons.txt and teachers.txt consist the program's inputs.
